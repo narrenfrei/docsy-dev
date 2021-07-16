@@ -7,6 +7,11 @@ tags: ["Shortcode", "Attachments"]
 projects: ["Docsy"]
 description: >
   Testing Shortcode Attachments
+resources:
+- src: '**.pdf'
+  name: pdf-file-name-:counter
+  title: pdf-file-title-:counter
+  
 ---
 
 One of the best ways to see what Docsy can do, and learn how to configure a site with it, is to see some real projects. In addition to our provided Docsy Example Project, there are several live sites already using the theme. Please add your own examples once you've got a production site up and running with Docsy!
