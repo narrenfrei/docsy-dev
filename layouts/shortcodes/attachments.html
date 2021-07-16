@@ -52,7 +52,7 @@
       {{ with (.Page.Resources.Match $match) }}
         <ul>
             {{ range sort . "Title"}}
-            {{ $filestat := os.Stat .RelPermalink }}
+            {{ $filestat := os.Stat .Permalink }}
                 <li>
                   <a href="{{ .RelPermalink }}" >{{.Title}} ({{ $filestat.Size }})</a>
                     <ul>
