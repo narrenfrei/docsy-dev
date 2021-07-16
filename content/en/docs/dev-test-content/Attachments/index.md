@@ -86,7 +86,7 @@ Especially for __none page bundles__ (not `index.md` or `_index.md`) it is also 
 
 The resulting file list can be filtered by the options `filter` (by using [RegEx](https://gohugo.io/functions/findre/ "Docs from used Hugo function for RegEx filtering.") on the filename relative to the current page). 
 
-{{< attachments title="Filtered page resources for 'jpg'" filter="jpg" />}}
+{{< attachments title="Filtered page resources for jpg files" filter=".+\.(?i)(jpg|jpeg)$" />}}
 
 {{< attachments folder="/" title="Filtered all files in folder for 'doc'" filter="doc" >}}
 Also the file `document.pdf` get listed, because it begins with "doc".
