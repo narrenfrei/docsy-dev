@@ -11,6 +11,8 @@ resources:
 - src: '**.pdf'
   name: pdf-file-name-:counter
   title: pdf-file-title-:counter
+  params:
+    description: "This ist the description of all PDF files."
   
 ---
 

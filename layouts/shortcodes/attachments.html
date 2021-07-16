@@ -9,7 +9,7 @@
 {{ $num_fmt_del := .Get "num-fmt-del" | default " "}}
 {{ $empty_list := .Get "empty_list" | default "No attachments found." }}
 <section class="card attachments{{ with $class }} {{.}}{{ end }}">
-	<label>
+	<label class="attachments-label">
     {{ with $icon }}<i class="attachments-icon {{ . }}" aria-hidden="true"></i>{{ end }}
 		{{ with $title }}{{- . -}}{{ end }}
 	</label>
@@ -55,23 +55,7 @@
               {{ $filestat := os.Stat (path.Join "content/" $.Page.File.Lang $.Page.File.Dir ( replace .RelPermalink $.Page.RelPermalink "" 1 )) }}
                   <li>
                     <a href="{{ .RelPermalink }}" >{{.Title}} ({{ $filestat.Size }})</a>
-                      <ul>
-                        <li>Name: {{ .Name }}</li>
-                        <li>Title: {{ .Title }}</li>
-                        <li>Permalink: {{ .Permalink }}</li>
-                        <li>RelPermalink: {{ .RelPermalink }}</li>
-                        <li>Page.RelPermalink: {{ $.Page.RelPermalink }}</li>
-
-                        <li>fix Name: {{ replace .RelPermalink $.Page.RelPermalink "" 1 }}</li>
-                        <li>fix FileName: {{ path.Base .RelPermalink }}</li>
-                        <li>Page.Dir: {{ $.Page.Dir }}</li>
-                        <li>Page.Resources: {{ $.Page.Resources }}</li>
-                        <!-- <li>Content: {{ .Content }}</li> -->
-                        <li>MediaType: {{ .MediaType }}</li>
-                        <li>MediaType.MainType: {{ .MediaType.MainType }}</li>
-                        <li>MediaType.SubType: {{ .MediaType.SubType }}</li>
-                        <li>MediaType.Suffixes: {{ .MediaType.Suffixes }}</li>
-                      </ul>
+                    {{ with .Params.description }}<label class="attachments-description">{{- . -}}</label>{{ end }}
                   </li>
               {{end}}
           </ul>
