@@ -15,7 +15,7 @@ One of the best ways to see what Docsy can do, and learn how to configure a site
 
 Example sites that have low to no customization:
 
-{{< attachments title="Attachments" />}}
+{{< attachments title="Attachments" match="*" />}}
 
 <!-- {{< attachments title="Related files" class="Klasse" icon="fas fa-link" >}}Innerer Content{{< /attachments >}}
 
