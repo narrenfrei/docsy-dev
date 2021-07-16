@@ -15,4 +15,4 @@ One of the best ways to see what Docsy can do, and learn how to configure a site
 
 Example sites that have low to no customization:
 
-{{< attachments title="Attachments" folder="files" />}}
+{{< attachments title="Attachments" />}}
