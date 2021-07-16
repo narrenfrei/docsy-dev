@@ -1,8 +1,7 @@
-
 ---
 title: "Getting Started"
 linkTitle: "Getting Started"
-weight: 2
+weight: 20
 date: 2018-07-30
 icon: fas fa-exclamation
 description: >

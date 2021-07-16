@@ -1,6 +1,6 @@
 ---
 title: "Examples"
-weight: 8
+weight: 80
 icon: fas fa-tools
 tags: ["tag 1","tag 2","tag 6"]
 projects: ["project 1","project 2","project 6"]

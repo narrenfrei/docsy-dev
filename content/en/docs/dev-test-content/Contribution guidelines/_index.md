@@ -1,7 +1,7 @@
 ---
 title: "Guidelines for Contribution to Docsy"
 linkTitle: "Contribution Guidelines"
-weight: 9
+weight: 90
 icon: fas fa-indent
 tags: ["tag 1","tag 2","tag 4"]
 projects: ["project 1","project 2","project 4"]

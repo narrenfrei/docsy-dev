@@ -1,7 +1,7 @@
 ---
 title: "Multi-language Support"
 linkTitle: "Multi-language Support"
-weight: 7
+weight: 70
 icon: fas fa-globe
 description: >
   Support multiple languages in your site.

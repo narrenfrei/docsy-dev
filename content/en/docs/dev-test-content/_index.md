@@ -1,6 +1,6 @@
 ---
 title: "DEV Test Content"
-weight: 2
+weight: 1
 icon: fas fa-tools
 tags: ["tag 1","tag 2","tag 3","a very long tag","atagwithaveryverylongword","atagwithaveryveryveryveryveryverylongword","one more long tag existing of more words","And another long tag existing of much more words, to see if the screen will explode, wenn it's really very very long","Testtag"]
 projects: ["project 1","project 2","project 3"]

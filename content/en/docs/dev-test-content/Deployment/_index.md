@@ -1,7 +1,7 @@
 ---
 title: "Previews and Deployment"
 linkTitle: "Previews and Deployment"
-weight: 7
+weight: 70
 icon: fas fa-eye
 tags: ["tag 1","tag 4","tag 5"]
 projects: ["project 1","project 4","project 5"]

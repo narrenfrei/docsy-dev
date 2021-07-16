@@ -1,6 +1,6 @@
 ---
 title: "Manual Link"
-weight: 1
+weight: 10
 description: >
   Some examples for manual links
 ---
