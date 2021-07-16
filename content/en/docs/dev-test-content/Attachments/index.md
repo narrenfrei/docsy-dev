@@ -15,10 +15,10 @@ One of the best ways to see what Docsy can do, and learn how to configure a site
 
 Example sites that have low to no customization:
 
-{{< attachments title="Attachments" match="*" />}}
+<!-- {{< attachments title="Attachments" match="*" />}} -->
 
-<!-- {{< attachments title="Related files" class="Klasse" icon="fas fa-link" >}}Innerer Content{{< /attachments >}}
+<!-- {{< attachments title="Related files" class="Klasse" icon="fas fa-link" >}}Innerer Content{{< /attachments >}} -->
 
 {{< attachments title="Related files" class="Klasse" folder="files" icon=false />}}
 
-{{< attachments title="Spezial-Icon und Filter auf Page Resourcen" icon="fas fa-file-pdf" match="**.pdf" />}} -->
+<!-- {{< attachments title="Spezial-Icon und Filter auf Page Resourcen" icon="fas fa-file-pdf" match="**.pdf" />}} -->
