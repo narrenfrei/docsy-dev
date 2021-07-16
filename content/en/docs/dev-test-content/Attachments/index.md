@@ -20,7 +20,7 @@ Shortcode to show a list of downloadable page resources resp. files in a folder.
 
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
-| title | (T "attachments") | The title of the box with the attachments. (The default value is a language specific variable.)
+| title | (T "shortcode_attachments") | The title of the box with the attachments. (The default value is a language specific variable.)
 | icon |  "fas fa-paperclip"| Code for FontAwesome icon left from the title.
 | folder | | If empty the page resources are used for the file list. If set a specific folder relativ to the current page can be used for generating a file list.
 | recursive |  true | If true als files in subfolders will be found (only if the parameter `folder` is used).
