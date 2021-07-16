@@ -16,62 +16,62 @@
 	<div class="attachments-files">
     <!-- {{ with $title }}{{- . -}}{{ end }} -->
       {{ with $folder }}
-      <!-- {{ $path := replace (printf "./content/%s/%s%s" $.Page.File.Lang $.Page.File.Dir .) "\\" "/" }} -->
-      {{ $path := path.Join "content/" $.Page.File.Lang $.Page.File.Dir . }}
-      {{ $file_list := newScratch }}
-        {{ range ( readDir $path ) }}
-          {{ if .IsDir }}
-            {{ template "recursive-files" (dict "path" (path.Join $path .Name) "folder" (path.Join $folder .Name) "recursive" true "file_list" $file_list "filter" $filter)}}
-          {{ else }}
-            {{ if (findRE $filter .Name) }}
-              {{ $file_list.SetInMap "files" .Name ( (path.Join $folder .Name) ) }}
+        <!-- {{ $path := replace (printf "./content/%s/%s%s" $.Page.File.Lang $.Page.File.Dir .) "\\" "/" }} -->
+        {{ $path := path.Join "content/" $.Page.File.Lang $.Page.File.Dir . }}
+        {{ $file_list := newScratch }}
+          {{ range ( readDir $path ) }}
+            {{ if .IsDir }}
+              {{ template "recursive-files" (dict "path" (path.Join $path .Name) "folder" (path.Join $folder .Name) "recursive" true "file_list" $file_list "filter" $filter)}}
+            {{ else }}
+              {{ if (findRE $filter .Name) }}
+                {{ $file_list.SetInMap "files" .Name ( (path.Join $folder .Name) ) }}
+              {{ end }}
             {{ end }}
           {{ end }}
-        {{ end }}
-        {{ with ($file_list.Get "files") }}
-          <ul>
-            {{ range sort . }}
-              {{ $filestat := os.Stat (path.Join "content/" $.Page.File.Lang $.Page.File.Dir .) }}
-              {{ $filesize := newScratch }}
-              {{ if (ge $filestat.Size (math.Pow 1024 3))}}
-                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 3)) $num_fmt $num_fmt_del) "GB")}}
-              {{ else if (ge $filestat.Size (math.Pow 1024 2))}}
-                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 2)) $num_fmt $num_fmt_del) "MB")}}
-              {{ else if (ge $filestat.Size 1024)}}
-                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size 1024.0) $num_fmt $num_fmt_del) "kB")}}
-              {{ else }}
-                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 $filestat.Size $num_fmt $num_fmt_del) "Byte")}}
+          {{ with ($file_list.Get "files") }}
+            <ul>
+              {{ range sort . }}
+                {{ $filestat := os.Stat (path.Join "content/" $.Page.File.Lang $.Page.File.Dir .) }}
+                {{ $filesize := newScratch }}
+                {{ if (ge $filestat.Size (math.Pow 1024 3))}}
+                  {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 3)) $num_fmt $num_fmt_del) "GB")}}
+                {{ else if (ge $filestat.Size (math.Pow 1024 2))}}
+                  {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 2)) $num_fmt $num_fmt_del) "MB")}}
+                {{ else if (ge $filestat.Size 1024)}}
+                  {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size 1024.0) $num_fmt $num_fmt_del) "kB")}}
+                {{ else }}
+                  {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 $filestat.Size $num_fmt $num_fmt_del) "Byte")}}
+                {{ end }}
+                <li><a href="{{ . }}" >{{$filestat.Name}} ({{ $filesize.Get "size" }})</a></li>
               {{ end }}
-              <li><a href="{{ . }}" >{{$filestat.Name}} ({{ $filesize.Get "size" }})</a></li>
-            {{ end }}
-          </ul>
-        {{ else }}
-          <p>Keine Anhänge gefunden.</p>
-        {{ end }}
+            </ul>
+          {{ else }}
+            <p>Keine Anhänge gefunden.</p>
+          {{ end }}
       {{ else }}
-      {{ with (.Page.Resources.Match $match) }}
-        <ul>
-            {{ range sort . "Title"}}
-            {{ $filestat := os.Stat .RelPermalink }}
-                <li>
-                  <a href="{{ .RelPermalink }}" >{{.Title}} ({{ $filestat.Size }})</a>
-                    <ul>
-                      <li>Name: {{ .Name }}</li>
-                      <li>Title: {{ .Title }}</li>
-                      <li>Permalink: {{ .Permalink }}</li>
-                      <li>RelPermalink: {{ .RelPermalink }}</li>
-                      <!-- <li>Content: {{ .Content }}</li> -->
-                      <li>MediaType: {{ .MediaType }}</li>
-                      <li>MediaType.MainType: {{ .MediaType.MainType }}</li>
-                      <li>MediaType.SubType: {{ .MediaType.SubType }}</li>
-                      <li>MediaType.Suffixes: {{ .MediaType.Suffixes }}</li>
-                    </ul>
-                </li>
-            {{end}}
-        </ul>
-      {{else}}
-        <p>Keine Anhänge gefunden.</p>
-      {{end}}
+        {{ with (.Page.Resources.Match $match) }}
+          <ul>
+              {{ range sort . "Title"}}
+              {{ $filestat := os.Stat .RelPermalink }}
+                  <li>
+                    <a href="{{ .RelPermalink }}" >{{.Title}} ({{ $filestat.Size }})</a>
+                      <ul>
+                        <li>Name: {{ .Name }}</li>
+                        <li>Title: {{ .Title }}</li>
+                        <li>Permalink: {{ .Permalink }}</li>
+                        <li>RelPermalink: {{ .RelPermalink }}</li>
+                        <!-- <li>Content: {{ .Content }}</li> -->
+                        <li>MediaType: {{ .MediaType }}</li>
+                        <li>MediaType.MainType: {{ .MediaType.MainType }}</li>
+                        <li>MediaType.SubType: {{ .MediaType.SubType }}</li>
+                        <li>MediaType.Suffixes: {{ .MediaType.Suffixes }}</li>
+                      </ul>
+                  </li>
+              {{end}}
+          </ul>
+        {{else}}
+          <p>Keine Anhänge gefunden.</p>
+        {{end}}
       {{end}}
 	</div>
   {{ with .Inner }}
