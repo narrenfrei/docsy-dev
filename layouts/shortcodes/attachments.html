@@ -49,24 +49,25 @@
           <p>Keine Anhänge gefunden.</p>
         {{ end }}
       {{ else }}
-      {{ with (.Page.Resources) }}
-    <ul>
-        {{ range sort . "Title"}}
-            <li>
-              <a href="{{ .RelPermalink }}" >{{.Title}}</a>
-                <ul>
-                  <li>Name: {{ .Name }}</li>
-                  <li>Title: {{ .Title }}</li>
-                  <li>Permalink: {{ .Permalink }}</li>
-                  <li>RelPermalink: {{ .RelPermalink }}</li>
-                  <!-- <li>Content: {{ .Content }}</li> -->
-                  <li>MediaType: {{ .MediaType }}</li>
-                  <li>MediaType.MainType: {{ .MediaType.MainType }}</li>
-                  <li>MediaType.SubType: {{ .MediaType.SubType }}</li>
-                </ul>
-            </li>
-        {{end}}
-    </ul>
+      {{ with (.Page.Resources.Match $match) }}
+        <ul>
+            {{ range sort . "Title"}}
+                <li>
+                  <a href="{{ .RelPermalink }}" >{{.Title}}</a>
+                    <ul>
+                      <li>Name: {{ .Name }}</li>
+                      <li>Title: {{ .Title }}</li>
+                      <li>Permalink: {{ .Permalink }}</li>
+                      <li>RelPermalink: {{ .RelPermalink }}</li>
+                      <!-- <li>Content: {{ .Content }}</li> -->
+                      <li>MediaType: {{ .MediaType }}</li>
+                      <li>MediaType.MainType: {{ .MediaType.MainType }}</li>
+                      <li>MediaType.SubType: {{ .MediaType.SubType }}</li>
+                      <li>MediaType.Suffixes: {{ .MediaType.Suffixes }}</li>
+                    </ul>
+                </li>
+            {{end}}
+        </ul>
       {{else}}
         <p>Keine Anhänge gefunden.</p>
       {{end}}
