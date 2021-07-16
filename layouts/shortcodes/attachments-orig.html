@@ -13,6 +13,14 @@
     {{ with $icon }}<i class="attachments-icon {{ . }}" aria-hidden="true"></i>{{ end }}
 		{{ with $title }}{{- . -}}{{ end }}
 	</label>
+  <!-- <p>
+    {{ with $title }}title: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $folder }}folder: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $filter }}filter: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $match }}match: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $class }}class: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $icon }}icon: {{ . | default "NONE"}}<br>{{ end }}
+  </p> -->
 	<div class="attachments-files">
     <!-- {{ with $title }}{{- . -}}{{ end }} -->
       {{ with $folder }}
@@ -49,21 +57,22 @@
           <p>Keine Anhänge gefunden.</p>
         {{ end }}
       {{ else }}
-      {{ with (.Page.Resources) }}
+      {{ with (.Page.Resources.Match $match) }}
     <ul>
         {{ range sort . "Title"}}
+          {{ $filestat := os.Stat .RelPermalink }}
+          {{ $filesize := newScratch }}
+          {{ if (ge $filestat.Size (math.Pow 1024 3))}}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 3)) $num_fmt $num_fmt_del) "GB")}}
+          {{ else if (ge $filestat.Size (math.Pow 1024 2))}}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 2)) $num_fmt $num_fmt_del) "MB")}}
+          {{ else if (ge $filestat.Size 1024)}}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size 1024.0) $num_fmt $num_fmt_del) "kB")}}
+          {{ else }}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 $filestat.Size $num_fmt $num_fmt_del) "Byte")}}
+          {{ end }}
             <li>
-              <a href="{{ .RelPermalink }}" >{{.Title}}</a>
-                <ul>
-                  <li>Name: {{ .Name }}</li>
-                  <li>Title: {{ .Title }}</li>
-                  <li>Permalink: {{ .Permalink }}</li>
-                  <li>RelPermalink: {{ .RelPermalink }}</li>
-                  <!-- <li>Content: {{ .Content }}</li> -->
-                  <li>MediaType: {{ .MediaType }}</li>
-                  <li>MediaType.MainType: {{ .MediaType.MainType }}</li>
-                  <li>MediaType.SubType: {{ .MediaType.SubType }}</li>
-                </ul>
+              <a href="{{ .RelPermalink }}" >{{$filestat.Name}} ({{ $filesize.Get "size" }})</a>
             </li>
         {{end}}
     </ul>
@@ -75,14 +84,6 @@
   {{ with .Inner }}
     <div class="attachments-inner">
       {{- . -}}
-      <p>
-        {{ with $title }}title: {{ . | default "NONE"}}<br>{{ end }}
-        {{ with $folder }}folder: {{ . | default "NONE"}}<br>{{ end }}
-        {{ with $filter }}filter: {{ . | default "NONE"}}<br>{{ end }}
-        {{ with $match }}match: {{ . | default "NONE"}}<br>{{ end }}
-        {{ with $class }}class: {{ . | default "NONE"}}<br>{{ end }}
-        {{ with $icon }}icon: {{ . | default "NONE"}}<br>{{ end }}
-      </p>
     </div>
   {{ end }}
 </section>
